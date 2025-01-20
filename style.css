@@ -1,5 +1,3 @@
-/* Reset et styles globaux */
-
 * {
 margin: 0;
 padding: 0;
@@ -21,55 +19,43 @@ padding: 1rem 2rem;
 text-align: center;
 }
 
-/* Fil d'Ariane */
+/* Fil d'Ariane dans le header */
 .breadcrumb {
-display: flex;
-justify-content: space-between;
-padding: 1rem 2rem;
-margin: 1rem auto;
-background-color: #fff;
-border: 1px solid #ddd;
-border-radius: 8px;
-max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto 0;
+  padding: 0 10px;
+  max-width: 80%;
 }
 
-.breadcrumb-step {
-text-align: center;
-flex: 1;
-position: relative;
+.breadcrumb div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* Cercles parfaits */
+  background: lightgray; /* Couleur par défaut */
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  color: black;
+  transition: background 0.3s, transform 0.3s; /* Animation douce */
 }
 
-/*
-.breadcrumb-step::after {
-content: '';
-position: absolute;
-top: 50%;
-right: -50%;
-height: 2px;
-width: 100%;
-background-color: #ccc;
-transform: translateY(-50%);
-}
-*/
-
-.breadcrumb-step:last-child::after {
-display: none;
+.breadcrumb div.active {
+  background: dodgerblue; /* Étape active */
+  color: white;
+  transform: scale(1.2); /* Agrandissement */
 }
 
-.step-number {
-display: inline-block;
-width: 30px;
-height: 30px;
-line-height: 30px;
-border-radius: 50%;
-background-color: #ddd;
-color: #666;
-font-weight: bold;
+.breadcrumb div.completed {
+  background: green; /* Étapes terminées */
+  color: white;
 }
 
-.active .step-number {
-background-color: #007bff;
-color: white;
+.breadcrumb div:hover {
+  cursor: pointer;
+  transform: scale(1.1); /* Effet au survol */
+  background: lightblue; /* Surbrillance */
 }
 
 /* Contenu principal */
@@ -106,4 +92,14 @@ margin-top: 1rem;
 
 button:hover {
 background-color: #0056b3;
+}
+
+/* Pied de page */
+footer {
+  background-color: #004aad; /* Bleu foncé */
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
