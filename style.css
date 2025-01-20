@@ -1,0 +1,109 @@
+/* Reset et styles globaux */
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
+}
+
+body {
+background-color: #f9f9f9;
+color: #333;
+line-height: 1.6;
+}
+
+/* En-tête */
+header {
+background-color: #007bff;
+color: white;
+padding: 1rem 2rem;
+text-align: center;
+}
+
+/* Fil d'Ariane */
+.breadcrumb {
+display: flex;
+justify-content: space-between;
+padding: 1rem 2rem;
+margin: 1rem auto;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+max-width: 900px;
+}
+
+.breadcrumb-step {
+text-align: center;
+flex: 1;
+position: relative;
+}
+
+/*
+.breadcrumb-step::after {
+content: '';
+position: absolute;
+top: 50%;
+right: -50%;
+height: 2px;
+width: 100%;
+background-color: #ccc;
+transform: translateY(-50%);
+}
+*/
+
+.breadcrumb-step:last-child::after {
+display: none;
+}
+
+.step-number {
+display: inline-block;
+width: 30px;
+height: 30px;
+line-height: 30px;
+border-radius: 50%;
+background-color: #ddd;
+color: #666;
+font-weight: bold;
+}
+
+.active .step-number {
+background-color: #007bff;
+color: white;
+}
+
+/* Contenu principal */
+.content {
+text-align: center;
+padding: 2rem;
+}
+
+.question-box {
+max-width: 600px;
+margin: 0 auto;
+padding: 1.5rem;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.question-box h2 {
+font-size: 1.4rem;
+margin-bottom: 1rem;
+}
+
+button {
+background-color: #007bff;
+color: white;
+padding: 0.8rem 1.5rem;
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+cursor: pointer;
+margin-top: 1rem;
+}
+
+button:hover {
+background-color: #0056b3;
+}
