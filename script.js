@@ -77,7 +77,7 @@ const questions = [
   const breadcrumb = document.getElementById("breadcrumb");
   const questionTitle = document.getElementById("question-title");
   const questionDescription = document.getElementById("question-description");
-  const questionInput = document.getElementById("question-input");
+  // const questionInput = document.getElementById("question-input");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   
@@ -104,6 +104,7 @@ const questions = [
   
     // Configurer l'input dynamiquement
     if (question.type === "select") {
+      const questionInput = document.getElementById("question-input");
       const select = document.createElement("select");
       question.options.forEach((opt) => {
         const option = document.createElement("option");
@@ -111,15 +112,21 @@ const questions = [
         option.textContent = opt;
         select.appendChild(option);
       });
+      
       questionInput.replaceWith(select);
       select.id = "question-input";
+  
     } else {
+      const prevInput = document.getElementById("question-input");
       const input = document.createElement("input");
       input.type = question.type;
       input.placeholder = question.placeholder;
-      questionInput.replaceWith(input);
+      prevInput.replaceWith(input);
       input.id = "question-input";
+      input.name = "tryout"
     }
+
+    // /!\ Refacto le bloc supérieur pour utiliser des variables plus explicites
   
     // Mettre à jour le fil d'Ariane
     Array.from(breadcrumb.children).forEach((step, index) => {
