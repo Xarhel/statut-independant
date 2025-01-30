@@ -4,7 +4,7 @@
 const questions = [
     {
       number: 1,
-      description: "Imaginez-vous avoir beaucoup de charges ?",
+      description: "<strong>Imaginez-vous avoir beaucoup de charges ?</strong>",
       type: "select",
       options: ["Oui", "Non"],
       placeholder: "",
@@ -18,14 +18,14 @@ const questions = [
     },
     {
       number: 3,
-      description: "Préférez-vous, toucher le chômage et vous verser un dividence important à la fin de l'année ou compléter votre salaire mensuellement sans vous verser un dididende?",
+      description: "Si vous touchez le chômage, préférez-vous:\n•toucher le chômage et vous verser un dividence important à la fin de l'année\n•compléter votre salaire mensuellement sans vous verser un dividende?",
       type: "select",
-      options: ["Verser un gros dividence à la fin de l'année", "Compléter mon salaire mensuellement"],
+      options: ["Verser un gros dividence à la fin de l'année", "Compléter mon salaire mensuellement", "Je ne touche pas le chômage"],
       placeholder: "",
     },
     {
       number: 4,
-      description: "Quel chiffre d'affaires pensez-vous dégager la première année ?",
+      description: "Quel chiffre d'affaires pensez-vous dégager la première année ? (en € HT)",
       type: "number",
       placeholder: "Entrez votre chiffre d'affaires estimé",
     },
@@ -33,41 +33,16 @@ const questions = [
       number: 5,
       description: "Souhaitez-vous protéger votre patrimoine personnel ou estimez-vous que les risques sont plutôt faibles ?",
       type: "select",
-      options: ["Je protège mon patrimonie personnel", "Ce n'est pas le plus important"],
+      options: ["Je protège mon patrimoine personnel", "Les risques sont plutôt faibles"],
       placeholder: "",
     },
     {
       number: 6,
-      description: "Quelle est votre localisation géographique ?",
-      type: "text",
-      placeholder: "Ville ou région",
-    },
-    {
-      number: 7,
-      description: "Quel est votre domaine d'activité ?",
-      type: "text",
-      placeholder: "Entrez votre domaine",
-    },
-    {
-      number: 8,
-      description: "Depuis combien de temps êtes-vous indépendant ?",
-      type: "number",
-      placeholder: "Années d'expérience",
-    },
-    {
-      number: 9,
-      description: "Souhaitez-vous bénéficier d'une assistance juridique ?",
+      description: "Quelle activité exercez-vous ?",
       type: "select",
-      options: ["Oui", "Non"],
+      options: ["Libérale", "Commerciale", "Artisanale", "Immobilière"],
       placeholder: "",
-    },
-    {
-      number: 10,
-      description: "Quel type de contrat préférez-vous ?",
-      type: "select",
-      options: ["Micro-entreprise", "SASU", "EURL", "Autre"],
-      placeholder: "",
-    },
+    }
   ];
   
   let currentStep = 0; // Étape actuelle
@@ -77,7 +52,6 @@ const questions = [
   const breadcrumb = document.getElementById("breadcrumb");
   const questionTitle = document.getElementById("question-title");
   const questionDescription = document.getElementById("question-description");
-  // const questionInput = document.getElementById("question-input");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   
@@ -100,8 +74,9 @@ const questions = [
   function loadQuestion() {
     const question = questions[currentStep];
     questionTitle.textContent = `Question ${question.number}`;
-    questionDescription.textContent = question.description;
+    questionDescription.innerHTML = question.description.replace(/\n/g, '<br>');
   
+    // Il pourrait être intéressant de passer d'un select à des radio buttons pour les questions à choix multiples
     // Configurer l'input dynamiquement
     if (question.type === "select") {
       const questionInput = document.getElementById("question-input");
@@ -117,13 +92,12 @@ const questions = [
       select.id = "question-input";
   
     } else {
-      const prevInput = document.getElementById("question-input");
+      const questionInput = document.getElementById("question-input");
       const input = document.createElement("input");
       input.type = question.type;
       input.placeholder = question.placeholder;
-      prevInput.replaceWith(input);
+      questionInput.replaceWith(input);
       input.id = "question-input";
-      input.name = "tryout"
     }
 
     // /!\ Refacto le bloc supérieur pour utiliser des variables plus explicites
