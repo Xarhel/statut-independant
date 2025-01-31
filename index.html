@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Trouve le meilleur statut pour lancer ton activité d'indépendant
+    </title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trouve le meilleur statut pour lancer ton activité d'indépendant</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-</head>
+  <body>
+    <header>
+      <h1>Trouve le meilleur statut pour lancer ton activité d'indépendant</h1>
+    </header>
 
-<body>
+    <div id="breadcrumb" class="breadcrumb"></div>
 
-  <header>
-    <h1>Trouve le meilleur statut pour lancer ton activité d'indépendant</h1>
-  </header>
+    <!-- Contenu des questions -->
+    <div id="question-container" class="question-container">
+      <h2 id="question-title">Question 1</h2>
+      <p id="question-description">Description de la question.</p>
+      <input id="question-input" type="text" placeholder="Votre réponse ici" />
+    </div>
 
-  <div id="breadcrumb" class="breadcrumb"></div>
-
-  <!-- Contenu des questions -->
-  <div id="question-container" class="question-container">
-    <h2 id="question-title">Question 1</h2>
-    <p id="question-description">Description de la question.</p>
-    <input id="question-input" type="text" placeholder="Votre réponse ici" />
-  </div>
-
-  <!-- Navigation -->
-  <div class="navigation">
-    <button id="prev-btn" disabled>Précédent</button>
-    <button id="next-btn">Suivant</button>
-
-    
-  </div>
+    <!-- Navigation -->
+    <div class="navigation">
+      <button id="prev-btn" disabled>Précédent</button>
+      <button id="next-btn">Suivant</button>
+    </div>
   </body>
 </html>
