@@ -8,14 +8,17 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 /* En-tête */
 header {
-  background-color: #007bff;
+  background-color: #3b4552;
   color: white;
   padding: 1rem 2rem;
   text-align: center;
@@ -26,8 +29,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px auto 0;
-  padding: 0 10px;
+  padding: 2rem;
+  margin: 0 auto 0;
   max-width: 50%;
 }
 
@@ -63,15 +66,15 @@ header {
 /* Contenu principal */
 .content {
   text-align: center;
-  padding: 2rem;
+  flex: 1;
 }
 
-.question-container {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 1.5rem;
   background-color: #fff;
@@ -80,13 +83,25 @@ header {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.question-container h2 {
+.container h2 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 
-.question-container p {
+.container p {
   margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.helper {
+  background-color:tan;
+  color: #333;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 .navigation {
@@ -94,6 +109,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin: 40px auto 0;
 }
 
 button {
@@ -111,12 +127,14 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Pied de page */
 footer {
-  background-color: #004aad; /* Bleu foncé */
+  background-color: #3b4552;
   color: white;
   text-align: center;
+  position: relative;
   padding: 10px 20px;
   font-size: 0.9rem;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  bottom: 0;
+  width: 100%;
 }

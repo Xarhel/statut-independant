@@ -4,10 +4,11 @@
 const questions = [
   {
     number: 1,
-    description: "<strong>Imaginez-vous avoir beaucoup de charges ?</strong>",
+    description: "Imaginez-vous avoir beaucoup de charges ?",
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
+    helper: "Les charges sont les dépenses liées à l'activité de l'entreprise : loyer, fournitures, logiciels, frais de déplacement...",
   },
   {
     number: 2,
@@ -15,11 +16,12 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
+    helper: "Désormais appelée allocation d'aide au retour à l'emploi (ARE), elle est versée par Pôle Emploi aux personnes ayant perdu leur emploi.",
   },
   {
     number: 3,
     description:
-      "Si vous touchez le chômage, préférez-vous:\n• toucher le chômage et vous verser un dividence important à la fin de l'année\n• compléter votre salaire mensuellement sans vous verser un dividende?",
+      "Si vous touchez le chômage, vous préférez :\n\n• Toucher le chômage et vous verser un dividence important à la fin de l'année ?\n\n• Compléter votre salaire mensuellement sans vous verser un dividende ?\n",
     type: "select",
     options: [
       "Verser un gros dividence à la fin de l'année",
@@ -27,6 +29,7 @@ const questions = [
       "Je ne touche pas le chômage",
     ],
     placeholder: "",
+    helper: "Le dividende est la part des bénéfices distribuée aux associés ou actionnaires d'une entreprise.",
   },
   {
     number: 4,
@@ -34,6 +37,7 @@ const questions = [
     type: "select",
     options: ["Libérale", "Commerciale", "Artisanale"],
     placeholder: "",
+    helper: "L'activité libérale regroupe les professions intellectuelles (avocat, médecin, architecte, chef de projet, développeur...). L'activité commerciale concerne la vente de produits ou de services. L'activité artisanalae est un métier manuel qui nécessite un savoir-faire particulier.",
   },
   {
     number: 5,
@@ -52,6 +56,7 @@ const questions = [
       "Les risques sont plutôt faibles",
     ],
     placeholder: "",
+    helper: "Préférez l'option 'les risques sont plutôt faibles' si votre activitez ne vous amène pas à prendre des risques financiers importants.",
   },
 ];
 
@@ -62,8 +67,10 @@ const answers = {}; // Stockage des réponses
 const breadcrumb = document.getElementById("breadcrumb");
 const questionTitle = document.getElementById("question-title");
 const questionDescription = document.getElementById("question-description");
+const helper = document.getElementById("helper");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
+let winner;
 
 // Initialisation de l'application
 function initialize() {
@@ -75,6 +82,9 @@ function initialize() {
     if (index === 0) step.classList.add("active");
     breadcrumb.appendChild(step);
   });
+
+  // Masquer la div des résultats
+  document.getElementById("result-container").style.display = "none";
 
   // Charger la première question
   loadQuestion();
@@ -109,7 +119,13 @@ function loadQuestion() {
     input.id = "question-input";
   }
 
-  // /!\ Refacto le bloc supérieur pour utiliser des variables plus explicites
+  // Faire apparaître l'aide si besoin
+  if (question.helper) {
+    helper.style.display = "block";
+    helper.textContent = question.helper;
+  } else {
+    helper.style.display = "none";
+  }
 
   // Mettre à jour le fil d'Ariane
   Array.from(breadcrumb.children).forEach((step, index) => {
@@ -146,6 +162,7 @@ nextBtn.addEventListener("click", () => {
     console.log("Réponses :", answers);
     alert("Questionnaire terminé !");
     computeTotal();
+    showResult();
   }
 });
 
@@ -205,8 +222,6 @@ function computeTotal() {
     micro += 1;
   }
 
-  let winner;
-
   if (micro > eurl && micro > sasu) {
     winner = "micro";
   } else if (eurl > micro && eurl > sasu) {
@@ -215,6 +230,15 @@ function computeTotal() {
     winner = "sasu";
   }
   console.log("micro = " + micro, "\neurl = " + eurl, "\nsasu = " + sasu);
+}
+
+function showResult() {
+  const questionContainer = document.getElementById("question-container");
+  questionContainer.style.display = "none";
+  const resultContainer = document.getElementById("result-container");
+  document.getElementById("result-title").textContent = "Résultat";
+  document.getElementById("result-description").textContent = `Vous devriez opter pour une ${winner.toUpperCase()}.`;
+  resultContainer.style.display = "block";
 }
 
 // Démarrer l'application
