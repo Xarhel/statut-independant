@@ -8,7 +8,7 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
-    helper: "Les charges sont les dépenses liées à l'activité de l'entreprise : loyer, fournitures, logiciels, frais de déplacement...",
+    helper: "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, déplacements, logiciels, formations...",
   },
   {
     number: 2,
@@ -56,7 +56,7 @@ const questions = [
       "Les risques sont plutôt faibles",
     ],
     placeholder: "",
-    helper: "Préférez l'option 'les risques sont plutôt faibles' si votre activitez ne vous amène pas à prendre des risques financiers importants.",
+    helper: "Préférez l'option 'les risques sont plutôt faibles' si votre activité ne vous amène pas à prendre des risques financiers importants.",
   },
 ];
 
@@ -160,9 +160,9 @@ nextBtn.addEventListener("click", () => {
     goToStep(currentStep + 1);
   } else {
     console.log("Réponses :", answers);
-    alert("Questionnaire terminé !");
     computeTotal();
     showResult();
+    explainResult();
   }
 });
 
@@ -237,8 +237,31 @@ function showResult() {
   questionContainer.style.display = "none";
   const resultContainer = document.getElementById("result-container");
   document.getElementById("result-title").textContent = "Résultat";
-  document.getElementById("result-description").textContent = `Vous devriez opter pour une ${winner.toUpperCase()}.`;
   resultContainer.style.display = "block";
+}
+// CONTINUER ICI AVEC LES AUTRES RESULTATS
+function explainResult() {
+  if (winner === "micro") {
+    document.getElementById("result-description").innerHTML = `<p>Vous devriez opter pour une micro</p>
+    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel (EI)</p>
+    <p>Le statut de la micro-entreprise permet de bénéficier d'une comptabilité allégée et de payer des cotisations sociales et des impôts sur le revenu en fonction du chiffre d'affaires réalisé.</p>
+    <p>Ce choix est particulièrement adapté dans des cas où les charges sont faibles, le chiffre d'affaires est limité et les risques sont faibles.</p>
+    <h2> Vous souhaitez aller plus loin ?</h2>
+    <p>Voici quelques sites pour vous aider à y voir plus clair :</p>
+    <ul>
+      <li><a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F31228" target="_blank">Service Public - Micro-entrepreneur</a></li>
+      <li><a href="https://www.urssaf.fr/portail/home/independant/je-cree-ma-micro-entreprise.html" target="_blank">URSSAF - Créer ma micro-entreprise</a></li>
+      <li><a href="https://www.autoentrepreneur.urssaf.fr/portail/accueil.html" target="_blank">Auto-Entrepreneur URSSAF</a></li>
+    </ul>`;
+  } 
+  
+    else if (winner === "eurl") {
+    document.getElementById("result-description").textContent = `Vous devriez opter pour une EURL.`
+  } 
+  
+    else {
+    document.getElementById("result-description").textContent = `Vous devriez opter pour une SASU.`
+  }
 }
 
 // Démarrer l'application
