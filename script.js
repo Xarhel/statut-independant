@@ -96,6 +96,10 @@ function loadQuestion() {
   questionTitle.textContent = `Question ${question.number}`;
   questionDescription.innerHTML = question.description.replace(/\n/g, "<br>");
 
+  // AJOUTER ICI LE CODE POUR RECUPERER LA REPONSE ENREGISTREE DANS LE LOCAL STORAGE ⚠
+  // if (answers...)
+  //
+
   // Il pourrait être intéressant de passer d'un select à des radio buttons pour les questions à choix multiples
   // Configurer l'input dynamiquement
   if (question.type === "select") {
@@ -137,15 +141,17 @@ function loadQuestion() {
   prevBtn.disabled = currentStep === 0;
   nextBtn.textContent =
     currentStep === questions.length - 1 ? "Terminer" : "Suivant";
+  console.log(currentStep);
 }
 
 // Passer à une étape donnée
 function goToStep(step) {
-  // Sauvegarder la réponse actuelle
+  // Sauvegarder la réponse actuelle si l'utilisateur ne revient pas en arrière
   const input = document.getElementById("question-input");
+  if (currentStep != questions.length) {
   answers[`question${questions[currentStep].number}`] =
     input.value || input.selectedOptions?.[0]?.value;
-
+  }
   // Mettre à jour l'étape
   currentStep = step;
 
@@ -154,11 +160,18 @@ function goToStep(step) {
 }
 
 // Gestion des événements des boutons
-prevBtn.addEventListener("click", () => goToStep(currentStep - 1));
+prevBtn.addEventListener("click", () => {
+  goToStep(currentStep - 1)
+  document.getElementById("result-container").style.display = "none";
+  document.getElementById("question-container").style.display = "block";
+});
 nextBtn.addEventListener("click", () => {
   if (currentStep < questions.length - 1) {
     goToStep(currentStep + 1);
+    document.getElementById("result-container").style.display = "none";
+    document.getElementById("question-container").style.display = "block";
   } else {
+    currentStep = questions.length;
     console.log("Réponses :", answers);
     computeTotal();
     showResult();
@@ -179,6 +192,8 @@ function computeTotal() {
   if (question1 === "Oui") {
     eurl += 10;
     sasu += 10;
+  } else {
+    micro += 100;
   }
 
   if (question2 === "Oui") {
@@ -239,11 +254,13 @@ function showResult() {
   document.getElementById("result-title").textContent = "Résultat";
   resultContainer.style.display = "block";
 }
-// CONTINUER ICI AVEC LES AUTRES RESULTATS
+// CONTINUER ICI AVEC LES AUTRES RESULTATS ⚠
+//
+//
 function explainResult() {
   if (winner === "micro") {
     document.getElementById("result-description").innerHTML = `<p>Vous devriez opter pour une micro</p>
-    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel (EI)</p>
+    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel (EI).</p>
     <p>Le statut de la micro-entreprise permet de bénéficier d'une comptabilité allégée et de payer des cotisations sociales et des impôts sur le revenu en fonction du chiffre d'affaires réalisé.</p>
     <p>Ce choix est particulièrement adapté dans des cas où les charges sont faibles, le chiffre d'affaires est limité et les risques sont faibles.</p>
     <h2> Vous souhaitez aller plus loin ?</h2>
