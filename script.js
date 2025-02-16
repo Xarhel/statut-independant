@@ -8,7 +8,8 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
-    helper: "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, déplacements, logiciels, formations...",
+    helper:
+      "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, déplacements, logiciels, formations...",
   },
   {
     number: 2,
@@ -16,7 +17,8 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
-    helper: "Désormais appelée allocation d'aide au retour à l'emploi (ARE), elle est versée par Pôle Emploi aux personnes ayant perdu leur emploi.",
+    helper:
+      "Désormais appelée allocation d'aide au retour à l'emploi (ARE), elle est versée par Pôle Emploi aux personnes ayant perdu leur emploi.",
   },
   {
     number: 3,
@@ -29,7 +31,8 @@ const questions = [
       "Je ne touche pas le chômage",
     ],
     placeholder: "",
-    helper: "Le dividende est la part des bénéfices distribuée aux associés ou actionnaires d'une entreprise.",
+    helper:
+      "Le dividende est la part des bénéfices distribuée aux associés ou actionnaires d'une entreprise.",
   },
   {
     number: 4,
@@ -37,7 +40,8 @@ const questions = [
     type: "select",
     options: ["Libérale", "Commerciale", "Artisanale"],
     placeholder: "",
-    helper: "L'activité libérale regroupe les professions intellectuelles (avocat, médecin, architecte, chef de projet, développeur...). L'activité commerciale concerne la vente de produits ou de services. L'activité artisanalae est un métier manuel qui nécessite un savoir-faire particulier.",
+    helper:
+      "L'activité libérale regroupe les professions intellectuelles (avocat, médecin, architecte, chef de projet, développeur...). L'activité commerciale concerne la vente de produits ou de services. L'activité artisanale est un métier manuel qui nécessite un savoir-faire particulier.",
   },
   {
     number: 5,
@@ -56,7 +60,8 @@ const questions = [
       "Les risques sont plutôt faibles",
     ],
     placeholder: "",
-    helper: "Préférez l'option 'les risques sont plutôt faibles' si votre activité ne vous amène pas à prendre des risques financiers importants.",
+    helper:
+      "Préférez l'option 'les risques sont plutôt faibles' si votre activité ne vous amène pas à prendre des risques financiers importants.",
   },
 ];
 
@@ -96,10 +101,6 @@ function loadQuestion() {
   questionTitle.textContent = `Question ${question.number}`;
   questionDescription.innerHTML = question.description.replace(/\n/g, "<br>");
 
-  // AJOUTER ICI LE CODE POUR RECUPERER LA REPONSE ENREGISTREE DANS LE LOCAL STORAGE ⚠
-  // if (answers...)
-  //
-
   // Il pourrait être intéressant de passer d'un select à des radio buttons pour les questions à choix multiples
   // Configurer l'input dynamiquement
   if (question.type === "select") {
@@ -121,6 +122,12 @@ function loadQuestion() {
     input.placeholder = question.placeholder;
     questionInput.replaceWith(input);
     input.id = "question-input";
+  }
+
+  // Pré-remplir la réponse si elle existe
+  if (answers[`question${question.number}`]) {
+    document.getElementById("question-input").value =
+      answers[`question${question.number}`];
   }
 
   // Faire apparaître l'aide si besoin
@@ -149,8 +156,8 @@ function goToStep(step) {
   // Sauvegarder la réponse actuelle si l'utilisateur ne revient pas en arrière
   const input = document.getElementById("question-input");
   if (currentStep != questions.length) {
-  answers[`question${questions[currentStep].number}`] =
-    input.value || input.selectedOptions?.[0]?.value;
+    answers[`question${questions[currentStep].number}`] =
+      input.value || input.selectedOptions?.[0]?.value;
   }
   // Mettre à jour l'étape
   currentStep = step;
@@ -161,7 +168,7 @@ function goToStep(step) {
 
 // Gestion des événements des boutons
 prevBtn.addEventListener("click", () => {
-  goToStep(currentStep - 1)
+  goToStep(currentStep - 1);
   document.getElementById("result-container").style.display = "none";
   document.getElementById("question-container").style.display = "block";
 });
@@ -171,6 +178,8 @@ nextBtn.addEventListener("click", () => {
     document.getElementById("result-container").style.display = "none";
     document.getElementById("question-container").style.display = "block";
   } else {
+    breadcrumb.children[currentStep].classList.toggle("active", false);
+    breadcrumb.children[currentStep].classList.toggle("completed", true);
     currentStep = questions.length;
     console.log("Réponses :", answers);
     computeTotal();
@@ -187,7 +196,9 @@ function computeTotal() {
   const question5 = answers["question5"];
   const question6 = answers["question6"];
 
-  let micro = 0, eurl = 0, sasu = 0;
+  let micro = 0,
+    eurl = 0,
+    sasu = 0;
 
   if (question1 === "Oui") {
     eurl += 10;
@@ -251,33 +262,57 @@ function showResult() {
   const questionContainer = document.getElementById("question-container");
   questionContainer.style.display = "none";
   const resultContainer = document.getElementById("result-container");
-  document.getElementById("result-title").textContent = "Résultat";
   resultContainer.style.display = "block";
 }
-// CONTINUER ICI AVEC LES AUTRES RESULTATS ⚠
+// A tester, éviter de charger le HTML à partir du JS et créer des classes spécifiques pour les résultats
 //
 //
 function explainResult() {
   if (winner === "micro") {
-    document.getElementById("result-description").innerHTML = `<p>Vous devriez opter pour une micro</p>
+    document.getElementById(
+      "result-description-container"
+    ).innerHTML = `<h2>Vous devriez opter pour une micro</h2>
     <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel (EI).</p>
     <p>Le statut de la micro-entreprise permet de bénéficier d'une comptabilité allégée et de payer des cotisations sociales et des impôts sur le revenu en fonction du chiffre d'affaires réalisé.</p>
     <p>Ce choix est particulièrement adapté dans des cas où les charges sont faibles, le chiffre d'affaires est limité et les risques sont faibles.</p>
-    <h2> Vous souhaitez aller plus loin ?</h2>
-    <p>Voici quelques sites pour vous aider à y voir plus clair :</p>
+    `;
+    document.getElementById("result-further-container").innerHTML = `
+    <h2>Vous souhaitez en savoir plus ?</h2>
+    <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F31228" target="_blank">
+      <div class="favicon-box">
+          <img src="http://www.google.com/s2/favicons?domain=www.service-public.fr" alt="Service Public Favicon">
+      </div>
+    </a>
+    <a href="https://www.urssaf.fr/portail/home/independant/je-cree-ma-micro-entreprise.html" target="_blank">
+      <div class="favicon-box">
+          <img src="http://www.google.com/s2/favicons?domain=www.urssaf.fr" alt="Service Public Favicon">
+      </div>
+    </a>
+    <a href="https://www.autoentrepreneur.urssaf.fr/portail/accueil.html" target="_blank">
+      <div class="favicon-box">
+          <img src="http://www.google.com/s2/favicons?domain=www.autoentrepeneur.urssaf.fr" alt="Service Public Favicon">
+      </div>
+    </a>
+    `;
+  } else if (winner === "eurl") {
+    document.getElementById(
+      "result-description-container"
+    ).innerHTML = `<p>Vous devriez opter pour une EURL.</p>
+    <p>Une EURL est une Entreprise Unipersonnelle à Responsabilité Limitée. C'est une société à responsabilité limitée (SARL) avec un seul associé.</p>
+    <p>Le principal avantage de l'EURL est de protéger le patrimoine personnel de l'entrepreneur en cas de difficultés financières de l'entreprise.</p>
+    <p>Le choix de l'EURL est particulièrement adapté pour les entrepreneurs individuels qui souhaitent protéger leur patrimoine personnel et bénéficier d'une fiscalité avantageuse.</p>
+    `;
+    document.getElementById("result-further-container").innerHTML = `
+    <h2>Vous souhaitez en savoir plus ?</h2>
     <ul>
-      <li><a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F31228" target="_blank">Service Public - Micro-entrepreneur</a></li>
-      <li><a href="https://www.urssaf.fr/portail/home/independant/je-cree-ma-micro-entreprise.html" target="_blank">URSSAF - Créer ma micro-entreprise</a></li>
-      <li><a href="https://www.autoentrepreneur.urssaf.fr/portail/accueil.html" target="_blank">Auto-Entrepreneur URSSAF</a></li>
+      <li><a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a></li>
+      <li><a href="https://www.legalstart.fr/fiches-pratiques/creation-entreprise/creer-eurl/" target="_blank">Legalstart - Créer une EURL</a></li>
+      <li><a href="https://www.legalstart.fr/fiches-pratiques/creation-entreprise/creer-eurl/" target="_blank">Legalstart - Créer une EURL</a></li>
     </ul>`;
-  } 
-  
-    else if (winner === "eurl") {
-    document.getElementById("result-description").textContent = `Vous devriez opter pour une EURL.`
-  } 
-  
-    else {
-    document.getElementById("result-description").textContent = `Vous devriez opter pour une SASU.`
+  } else {
+    document.getElementById(
+      "result-description-container"
+    ).innerHTML = `<p>Vous devriez opter pour une SASU.</p>`;
   }
 }
 

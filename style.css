@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif,
     sans-serif;
 }
@@ -18,7 +18,7 @@ body {
 
 /* En-tête */
 header {
-  background-color: #3b4552;
+  background-color: #2C3E50;
   color: white;
   padding: 1rem 2rem;
   text-align: center;
@@ -47,13 +47,13 @@ header {
 }
 
 .breadcrumb div.active {
-  background: dodgerblue; /* Étape active */
+  background: #007bff; /* Étape active */
   color: white;
   transform: scale(1.2); /* Agrandissement */
 }
 
 .breadcrumb div.completed {
-  background: green; /* Étapes terminées */
+  background: #2C3E50; /* Étapes terminées */
   color: white;
 }
 
@@ -93,8 +93,46 @@ header {
   font-weight: 500;
 }
 
+.favicon-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.favicon-box:hover {
+  transform: scale(1.1);
+}
+
+.favicon-box img {
+  width: 24px;
+  height: 24px;
+}
+
+input, select {
+  min-width: 50%;
+  width: auto;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  background: white;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+  border-color: #007BFF;  /* Bleu épuré */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
 .helper {
-  background-color:tan;
+  background-color:#ECF0F1;
   color: #333;
   padding: 0.5rem;
   border-radius: 5px;
@@ -128,7 +166,7 @@ button:hover {
 }
 
 footer {
-  background-color: #3b4552;
+  background-color: #2C3E50;
   color: white;
   text-align: center;
   position: relative;
