@@ -16,41 +16,56 @@
       <h1>Trouve le meilleur statut pour lancer ton activité d'indépendant</h1>
     </header>
 
-
     <div class="content">
+      <div class="main-content">
+        <div id="breadcrumb" class="breadcrumb"></div>
 
-    <div id="breadcrumb" class="breadcrumb"></div>
+        <!-- Contenu des questions -->
+        <div id="question-container" class="container">
+          <h2 id="question-title">Question 1</h2>
+          <p id="question-description">Description de la question.</p>
+          <input
+            id="question-input"
+            type="text"
+            placeholder="Votre réponse ici"
+          />
+          <div id="helper" class="helper"></div>
+        </div>
 
-    <!-- Contenu des questions -->
-    <div id="question-container" class="container">
-      <h2 id="question-title">Question 1</h2>
-      <p id="question-description">Description de la question.</p>
-      <input id="question-input" type="text" placeholder="Votre réponse ici" />
-      <div id="helper" class="helper"></div>
-    </div>
+        <!-- Contenu des résultats -->
+        <div id="result-container" class="container">
+          <div id="result-description-container" class="container">
+            <h2 id="result-title">Résultat</h2>
+            <p id="result-description">Description du résultat.</p>
+          </div>
+          <div id="result-further-container" class="container">
+            <h2 id="result-further-title">Pour aller plus loin</h2>
+            <p id="result-further-description">
+              Description de ce qu'il faut faire pour aller plus loin.
+            </p>
+          </div>
+        </div>
 
-    <!-- Contenu des résultats -->
-    <div id="result-container" class="container">
-      <div id="result-description-container" class="container">
-        <h2 id="result-title">Résultat</h2>
-        <p id="result-description">Description du résultat.</p>
+        <!-- Navigation -->
+        <div class="navigation">
+          <button id="prev-btn" disabled>Précédent</button>
+          <button id="next-btn">Suivant</button>
+        </div>
       </div>
-      <div id="result-further-container" class="container">
-        <h2 id="result-further-title">Pour aller plus loin</h2>
-        <p id="result-further-description">Description de ce qu'il faut faire pour aller plus loin.</p>
+
+      <div class="sidebar">
+        <div class="sidebar-content">
+          <h1>Résultats</h1>
+          <i>Jetez un rapide coup d'oeil à vos réponses précédentes</i>
+          <ul id="result-list-items"></ul>
+        </div>
       </div>
+
+
     </div>
 
-    <!-- Navigation -->
-    <div class="navigation">
-      <button id="prev-btn" disabled>Précédent</button>
-      <button id="next-btn">Suivant</button>
-    </div>
-  </div>
-
-  <footer>
-    <a>This is a test</a>
-  </footer>
-
+    <footer>
+      <a>This is a test</a>
+    </footer>
   </body>
 </html>

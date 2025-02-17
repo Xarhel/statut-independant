@@ -67,6 +67,40 @@ header {
 .content {
   text-align: center;
   flex: 1;
+  display: flex;
+}
+
+.main-content {
+  flex: 3;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.sidebar-content h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.sidebar-content u {
+  margin-bottom: 40px;
 }
 
 .container {
