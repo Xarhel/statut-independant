@@ -8,6 +8,7 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
+    shortcut: "Beaucoup de charges",
     helper:
       "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, déplacements, logiciels, formations...",
   },
@@ -17,6 +18,7 @@ const questions = [
     type: "select",
     options: ["Oui", "Non"],
     placeholder: "",
+    shortcut: "Chômage",
     helper:
       "Désormais appelée allocation d'aide au retour à l'emploi (ARE), elle est versée par Pôle Emploi aux personnes ayant perdu leur emploi.",
   },
@@ -31,6 +33,7 @@ const questions = [
       "Je ne touche pas le chômage",
     ],
     placeholder: "",
+    shortcut: "Mode de rémunération",
     helper:
       "Le dividende est la part des bénéfices distribuée aux associés ou actionnaires d'une entreprise.",
   },
@@ -40,6 +43,7 @@ const questions = [
     type: "select",
     options: ["Libérale", "Commerciale", "Artisanale"],
     placeholder: "",
+    shortcut: "Activité exercée",
     helper:
       "L'activité libérale regroupe les professions intellectuelles (avocat, médecin, architecte, chef de projet, développeur...). L'activité commerciale concerne la vente de produits ou de services. L'activité artisanale est un métier manuel qui nécessite un savoir-faire particulier.",
   },
@@ -49,6 +53,7 @@ const questions = [
       "Quel chiffre d'affaires pensez-vous dégager la première année ? (en € HT)",
     type: "number",
     placeholder: "Entrez votre chiffre d'affaires estimé",
+    shortcut: "chiffre d'affaires annuel",
   },
   {
     number: 6,
@@ -60,6 +65,7 @@ const questions = [
       "Les risques sont plutôt faibles",
     ],
     placeholder: "",
+    shortcut: "Protection du patrioine personnel",
     helper:
       "Préférez l'option 'les risques sont plutôt faibles' si votre activité ne vous amène pas à prendre des risques financiers importants.",
   },
@@ -125,9 +131,9 @@ function loadQuestion() {
   }
 
   // Pré-remplir la réponse si elle existe
-  if (answers[`question${question.number}`]) {
+  if (answers[`${question.number}`]) {
     document.getElementById("question-input").value =
-      answers[`question${question.number}`];
+      answers[`${question.number}`];
   }
 
   // Faire apparaître l'aide si besoin
@@ -149,6 +155,8 @@ function loadQuestion() {
   nextBtn.textContent =
     currentStep === questions.length - 1 ? "Terminer" : "Suivant";
   console.log(currentStep);
+
+  updateResultList();
 }
 
 // Passer à une étape donnée
@@ -156,7 +164,7 @@ function goToStep(step) {
   // Sauvegarder la réponse actuelle si l'utilisateur ne revient pas en arrière
   const input = document.getElementById("question-input");
   if (currentStep != questions.length) {
-    answers[`question${questions[currentStep].number}`] =
+    answers[`${questions[currentStep].number}`] =
       input.value || input.selectedOptions?.[0]?.value;
   }
   // Mettre à jour l'étape
@@ -164,6 +172,17 @@ function goToStep(step) {
 
   // Charger la nouvelle question
   loadQuestion();
+}
+
+function updateResultList() {
+  const resultList = document.getElementById("result-list-items");
+  resultList.innerHTML = "";
+  for (const key in answers) {
+    const questionsIterator = key*1 -1;
+    const item = document.createElement("li");
+    item.textContent = `${questions[questionsIterator].shortcut}: ${answers[key]}`;
+    resultList.appendChild(item);
+  }
 }
 
 // Gestion des événements des boutons
@@ -189,12 +208,12 @@ nextBtn.addEventListener("click", () => {
 });
 
 function computeTotal() {
-  const question1 = answers["question1"];
-  const question2 = answers["question2"];
-  const question3 = answers["question3"];
-  const question4 = answers["question4"];
-  const question5 = answers["question5"];
-  const question6 = answers["question6"];
+  const question1 = answers["1"];
+  const question2 = answers["2"];
+  const question3 = answers["3"];
+  const question4 = answers["4"];
+  const question5 = answers["5"];
+  const question6 = answers["6"];
 
   let micro = 0,
     eurl = 0,

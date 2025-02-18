@@ -99,8 +99,13 @@ header {
   margin-bottom: 40px;
 }
 
-.sidebar-content u {
+.sidebar-content i {
   margin-bottom: 40px;
+}
+
+.sidebar-content li {
+  list-style: none;
+  margin-bottom: 20px;
 }
 
 .container {
