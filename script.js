@@ -98,11 +98,12 @@ function initialize() {
   document.getElementById("result-container").style.display = "none";
 
   // Charger la première question
-  loadQuestion();
+  loadQuestion(currentStep);
 }
 
 // Charger une question spécifique
-function loadQuestion() {
+function loadQuestion(step) {
+  currentStep = step;
   const question = questions[currentStep];
   questionTitle.textContent = `Question ${question.number}`;
   questionDescription.innerHTML = question.description.replace(/\n/g, "<br>");
@@ -154,51 +155,52 @@ function loadQuestion() {
   prevBtn.disabled = currentStep === 0;
   nextBtn.textContent =
     currentStep === questions.length - 1 ? "Terminer" : "Suivant";
+  nextBtn.disabled = false;
   console.log(currentStep);
 
-  updateResultList();
+  //updateResultList();
 }
 
 // Passer à une étape donnée
-function goToStep(step) {
+function saveAnswer() {
   // Sauvegarder la réponse actuelle si l'utilisateur ne revient pas en arrière
   const input = document.getElementById("question-input");
   if (currentStep != questions.length) {
     answers[`${questions[currentStep].number}`] =
       input.value || input.selectedOptions?.[0]?.value;
   }
-  // Mettre à jour l'étape
-  currentStep = step;
-
-  // Charger la nouvelle question
-  loadQuestion();
+  updateResultList();
 }
 
 function updateResultList() {
   const resultList = document.getElementById("result-list-items");
   resultList.innerHTML = "";
   for (const key in answers) {
-    const questionsIterator = key*1 -1;
+    const questionsIterator = key * 1 - 1;
     const item = document.createElement("li");
-    item.textContent = `${questions[questionsIterator].shortcut}: ${answers[key]}`;
+    item.textContent = `${questions[questionsIterator].shortcut} : ${answers[key]}`;
     resultList.appendChild(item);
   }
 }
 
 // Gestion des événements des boutons
 prevBtn.addEventListener("click", () => {
-  goToStep(currentStep - 1);
+  loadQuestion(currentStep - 1);
   document.getElementById("result-container").style.display = "none";
   document.getElementById("question-container").style.display = "block";
+  document.getElementById("sidebar").style.display = "block";
 });
 nextBtn.addEventListener("click", () => {
+  saveAnswer();
   if (currentStep < questions.length - 1) {
-    goToStep(currentStep + 1);
+    loadQuestion(currentStep + 1);
     document.getElementById("result-container").style.display = "none";
     document.getElementById("question-container").style.display = "block";
   } else {
+    nextBtn.disabled = true;
     breadcrumb.children[currentStep].classList.toggle("active", false);
     breadcrumb.children[currentStep].classList.toggle("completed", true);
+    document.getElementById("sidebar").style.display = "none";
     currentStep = questions.length;
     console.log("Réponses :", answers);
     computeTotal();
@@ -291,7 +293,7 @@ function explainResult() {
     document.getElementById(
       "result-description-container"
     ).innerHTML = `<h2>Vous devriez opter pour une micro</h2>
-    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel (EI).</p>
+    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel" (EI).</p>
     <p>Le statut de la micro-entreprise permet de bénéficier d'une comptabilité allégée et de payer des cotisations sociales et des impôts sur le revenu en fonction du chiffre d'affaires réalisé.</p>
     <p>Ce choix est particulièrement adapté dans des cas où les charges sont faibles, le chiffre d'affaires est limité et les risques sont faibles.</p>
     `;
