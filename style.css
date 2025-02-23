@@ -103,9 +103,10 @@ header {
   margin-bottom: 40px;
 }
 
-.sidebar-content li {
+li {
   list-style: none;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .container {

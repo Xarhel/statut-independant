@@ -165,6 +165,10 @@ function loadQuestion(step) {
 function saveAnswer() {
   // Sauvegarder la réponse actuelle si l'utilisateur ne revient pas en arrière
   const input = document.getElementById("question-input");
+  if (input.value == '' && input.type == "number") {
+    input.value = 0;
+  }
+
   if (currentStep != questions.length) {
     answers[`${questions[currentStep].number}`] =
       input.value || input.selectedOptions?.[0]?.value;
@@ -331,9 +335,32 @@ function explainResult() {
       <li><a href="https://www.legalstart.fr/fiches-pratiques/creation-entreprise/creer-eurl/" target="_blank">Legalstart - Créer une EURL</a></li>
     </ul>`;
   } else {
-    document.getElementById(
-      "result-description-container"
-    ).innerHTML = `<p>Vous devriez opter pour une SASU.</p>`;
+    let sasuAdvantages = [
+      "✅ La SASU permet de protéger le patrimoine personnel de l'entrepreneur.",
+      "✅ La SASU offre une grande souplesse dans l'organisation de l'entreprise.",
+      "✅ La SASU permet de bénéficier d'une fiscalité avantageuse.",
+    ];
+    let sasuDisadvantages = [
+      "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise ou une EURL.",
+      "❌ La SASU nécessite de rédiger des statuts et de nommer un président.",
+    ];
+    document.getElementById("result-title").textContent = "Vous devriez oper pour une SASU";
+    document.getElementById("result-description").textContent = "La SASU (Société Par Actions Simplifiée) est une forme juridique qui permet à un entrepreneur de créer une société à responsabilité limitée.";
+    const resultAdvantages = document.getElementById("result-advantages");
+    resultAdvantages.innerHTML = "";
+    for (const advantage of sasuAdvantages) {
+      const li = document.createElement("li");
+      li.textContent = advantage;
+      resultAdvantages.appendChild(li);
+    }
+  
+    const resultDisadvantages = document.getElementById("result-disadvantages");
+    resultDisadvantages.innerHTML = "";
+    for (const disadvantage of sasuDisadvantages) {
+      const li = document.createElement("li");
+      li.textContent = disadvantage;
+      resultDisadvantages.appendChild(li);
+    }
   }
 }
 
