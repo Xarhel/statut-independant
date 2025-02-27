@@ -336,16 +336,21 @@ function explainResult() {
     </ul>`;
   } else {
     let sasuAdvantages = [
-      "✅ La SASU permet de protéger le patrimoine personnel de l'entrepreneur.",
+      "✅ La SASU est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
+      "✅ La SASU est souvent plébiscitée par les entrepreneurs souhaitant maintenir leurs droits au chômage (ARE) tout en se versant un dividende en fin d'année.",
       "✅ La SASU offre une grande souplesse dans l'organisation de l'entreprise.",
-      "✅ La SASU permet de bénéficier d'une fiscalité avantageuse.",
+      "✅ Le dirigeant de la SASU est 'assimilé salarié', cela signifie qu'il bénéficie d'une protection sociale plus importante que le dirigeant de micro-entreprise.",
     ];
     let sasuDisadvantages = [
-      "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise ou une EURL.",
-      "❌ La SASU nécessite de rédiger des statuts et de nommer un président.",
+      "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise.",
+      "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devrez payer des cotisations sociales importantes sur ce salaire.",
+      "❌ La SASU nécessite de rédiger des statuts et de nommer un président, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
     ];
-    document.getElementById("result-title").textContent = "Vous devriez oper pour une SASU";
-    document.getElementById("result-description").textContent = "La SASU (Société Par Actions Simplifiée) est une forme juridique qui permet à un entrepreneur de créer une société à responsabilité limitée.";
+/*     let websites = [ à modifier par les exemples utilisés dans le bloc micro
+      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>',
+      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>',
+      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>'
+    ] */
     const resultAdvantages = document.getElementById("result-advantages");
     resultAdvantages.innerHTML = "";
     for (const advantage of sasuAdvantages) {
@@ -353,13 +358,21 @@ function explainResult() {
       li.textContent = advantage;
       resultAdvantages.appendChild(li);
     }
-  
     const resultDisadvantages = document.getElementById("result-disadvantages");
     resultDisadvantages.innerHTML = "";
     for (const disadvantage of sasuDisadvantages) {
       const li = document.createElement("li");
       li.textContent = disadvantage;
       resultDisadvantages.appendChild(li);
+    }
+    document.getElementById("result-title").textContent = "Vous devriez oper pour une SASU";
+    document.getElementById("result-description").textContent = "La SASU (Société Par Actions Simplifiée) est une forme juridique qui permet à un entrepreneur de créer une société à responsabilité limitée.";
+    document.getElementById("result-further-description").textContent = "Voici quelques sites pour vous aider à mieux comprendre la SASU :";
+    const furtherLinks = document.getElementById("result-further-links");
+    for (const link of websites) {
+      const li = document.createElement("li");
+      li.innerHTML = link;
+      furtherLinks.appendChild(li);
     }
   }
 }
