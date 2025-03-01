@@ -18,8 +18,8 @@ body {
 
 /* En-tête */
 header {
-  background-color: #2C3E50;
-  color: white;
+  background-color: rgba(12,24,42,1);
+  color: antiquewhite;
   padding: 1rem 2rem;
   text-align: center;
 }
@@ -47,14 +47,14 @@ header {
 }
 
 .breadcrumb div.active {
-  background: #007bff; /* Étape active */
-  color: white;
+  background: antiquewhite; /* Étape active */
+  color: rgba(12,24,42,1) ;
   transform: scale(1.2); /* Agrandissement */
 }
 
 .breadcrumb div.completed {
-  background: #2C3E50; /* Étapes terminées */
-  color: white;
+  background: #a99a87; /* Étapes terminées */
+  color: rgba(12,24,42,1);
 }
 
 .breadcrumb div:hover {
@@ -72,17 +72,15 @@ header {
 
 .main-content {
   flex: 3;
-  background-color: #fff;
-  border-radius: 10px;
+  background-color: rgba(12,24,42,1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 }
 
 .sidebar {
-  flex: 1;
-  background-color: #ddd;
+  flex: 0.7;
+  background-color: rgb(4, 6, 8);
   padding: 20px;
-  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 }
@@ -95,12 +93,18 @@ header {
 
 .sidebar-content h1 {
   font-size: 24px;
+  color: antiquewhite;
   font-weight: 700;
   margin-bottom: 40px;
 }
 
 .sidebar-content i {
+  color: antiquewhite;
   margin-bottom: 40px;
+}
+
+.sidebar-content li {
+  color: antiquewhite;
 }
 
 li {
@@ -121,6 +125,20 @@ li {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-further-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  margin: 0 auto 0;
+  max-width: 50%;
+}
+
+.result-further-links p {
+  text-decoration: underline;
 }
 
 .container h2 {
@@ -206,13 +224,12 @@ button:hover {
 }
 
 footer {
-  background-color: #2C3E50;
-  color: white;
+  background-color: rgba(12,24,42,1);
+  color: antiquewhite;
   text-align: center;
   position: relative;
   padding: 10px 20px;
   font-size: 0.9rem;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   bottom: 0;
   width: 100%;
 }

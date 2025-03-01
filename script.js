@@ -10,7 +10,7 @@ const questions = [
     placeholder: "",
     shortcut: "Beaucoup de charges",
     helper:
-      "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, déplacements, logiciels, formations...",
+      "Les charges sont les dépenses liées à l'activité de l'entreprise : téléphone, internet, loyer, matières premières, déplacements, logiciels, formations...",
   },
   {
     number: 2,
@@ -25,10 +25,10 @@ const questions = [
   {
     number: 3,
     description:
-      "Si vous touchez le chômage, vous préférez :\n\n• Toucher le chômage et vous verser un dividence important à la fin de l'année ?\n\n• Compléter votre salaire mensuellement sans vous verser un dividende ?\n",
+      "Si vous touchez le chômage, vous préférez :\n\n• Toucher le chômage et vous verser un dividence à la fin de l'année ?\n\n• Compléter votre salaire mensuellement sans vous verser un dividende ?\n",
     type: "select",
     options: [
-      "Verser un gros dividence à la fin de l'année",
+      "Verser un dividence à la fin de l'année",
       "Compléter mon salaire mensuellement",
       "Je ne touche pas le chômage",
     ],
@@ -339,18 +339,31 @@ function explainResult() {
       "✅ La SASU est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
       "✅ La SASU est souvent plébiscitée par les entrepreneurs souhaitant maintenir leurs droits au chômage (ARE) tout en se versant un dividende en fin d'année.",
       "✅ La SASU offre une grande souplesse dans l'organisation de l'entreprise.",
-      "✅ Le dirigeant de la SASU est 'assimilé salarié', cela signifie qu'il bénéficie d'une protection sociale plus importante que le dirigeant de micro-entreprise.",
+      "✅ Le dirigeant de la SASU est 'assimilé salarié', cela signifie qu'il bénéficie d'une protection sociale plus importante que le dirigeant de micro-entreprise ou d'EURL.",
     ];
     let sasuDisadvantages = [
       "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise.",
-      "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devrez payer des cotisations sociales importantes sur ce salaire.",
+      "❌ Le dividende versé par la SASU est calculé après paiement de l'impôt sur les sociétés, 15% jusqu'à 42.500€ de bénéfice et 25% au-delà.",
+      "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devrez payer des cotisations sociales très importantes sur ce salaire.",
       "❌ La SASU nécessite de rédiger des statuts et de nommer un président, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
     ];
-/*     let websites = [ à modifier par les exemples utilisés dans le bloc micro
-      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>',
-      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>',
-      '<a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a>'
-    ] */
+     let websites = [
+      {
+        url: "https://bpifrance-creation.fr/encyclopedie/structures-juridiques/entreprendre-seul/sasu-societe-actions-simplifiee-unipersonnelle",
+        favicon: "http://www.google.com/s2/favicons?domain=www.bpifrance-creation.fr",
+        title: "Bpifrance"
+      },
+      {
+        url: "https://www.legalplace.fr/guides/sasu/",
+        favicon: "http://www.google.com/s2/favicons?domain=www.legalplace.fr",
+        title: "Legalplace"
+      },
+      {
+        url: "https://entreprendre.service-public.fr/vosdroits/F37383",
+        favicon: "http://www.google.com/s2/favicons?domain=www.service-public.fr",
+        title: "Service Public"
+      }
+    ]
     const resultAdvantages = document.getElementById("result-advantages");
     resultAdvantages.innerHTML = "";
     for (const advantage of sasuAdvantages) {
@@ -365,17 +378,38 @@ function explainResult() {
       li.textContent = disadvantage;
       resultDisadvantages.appendChild(li);
     }
-    document.getElementById("result-title").textContent = "Vous devriez oper pour une SASU";
-    document.getElementById("result-description").textContent = "La SASU (Société Par Actions Simplifiée) est une forme juridique qui permet à un entrepreneur de créer une société à responsabilité limitée.";
-    document.getElementById("result-further-description").textContent = "Voici quelques sites pour vous aider à mieux comprendre la SASU :";
-    const furtherLinks = document.getElementById("result-further-links");
-    for (const link of websites) {
-      const li = document.createElement("li");
-      li.innerHTML = link;
-      furtherLinks.appendChild(li);
-    }
+    document.getElementById("result-title").textContent = "Vous devriez opter pour une SASU";
+    document.getElementById("result-description").textContent = "La SASU (Société par Actions Simplifiée Unipersonnelle) est une forme juridique qui permet à un entrepreneur individuel de créer une société. Dans les points ci-dessous, nous prenons l'exemple d'une SASU à l'impôt sur les sociétés (IS) et non à l'impôt sur les revenus (IR).";
+    document.getElementById("result-further-description").textContent = "Voici quelques sites pour vous aider à mieux comprendre la SASU";
+    createLinks(websites);
   }
 }
+
+function createLinks(linksArray) {
+  const furtherLinks = document.getElementById("result-further-links");
+  furtherLinks.innerHTML = "";
+
+  linksArray.forEach(website => {
+    const link = document.createElement("a");
+    link.href = website.url;
+    link.target = "_blank";
+
+    const faviconBox = document.createElement("div");
+    faviconBox.className = "favicon-box";
+
+    const img = document.createElement("img");
+    img.src = website.favicon;
+    img.alt = `${website.title} + " favicon"`;
+
+    const websiteTitle = document.createElement("p");
+    websiteTitle.textContent = website.title;
+
+    faviconBox.appendChild(img);
+    link.appendChild(faviconBox);
+    furtherLinks.appendChild(link);
+    furtherLinks.appendChild(websiteTitle);
+  })
+};
 
 // Démarrer l'application
 initialize();
