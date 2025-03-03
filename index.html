@@ -12,12 +12,7 @@
   </head>
 
   <body>
-    <header>
-      <h1>Trouve le meilleur statut pour lancer ton activité d'indépendant</h1>
-    </header>
-
-    <div class="content">
-
+    <div class="global-layout">
       <div id="sidebar" class="sidebar">
         <div class="sidebar-content">
           <h1>Résultats</h1>
@@ -26,49 +21,58 @@
         </div>
       </div>
 
-      <div id="main-content" class="main-content">
-        <div id="breadcrumb" class="breadcrumb"></div>
+      <div class="content">
+        <header>
+          <h1>
+            Trouve le meilleur statut pour lancer ton activité d'indépendant
+          </h1>
+        </header>
 
-        <!-- Contenu des questions -->
-        <div id="question-container" class="container">
-          <h2 id="question-title">Question 1</h2>
-          <p id="question-description">Description de la question.</p>
-          <input
-            id="question-input"
-            type="text"
-            placeholder="Votre réponse ici"
-          />
-          <div id="helper" class="helper"></div>
-        </div>
+        <div id="main-content" class="main-content">
+          <div id="breadcrumb" class="breadcrumb"></div>
 
-        <!-- Contenu des résultats -->
-        <div id="result-container">
-          <div id="result-description-container" class="container">
-            <h2 id="result-title">.</h2>
-            <p id="result-description"></p>
-            <ul id="result-advantages"></ul>
-            <ul id="result-disadvantages"></ul>
+          <!-- Contenu des questions -->
+          <div id="question-container" class="container">
+            <h2 id="question-title">Question 1</h2>
+            <p id="question-description">Description de la question.</p>
+            <input
+              id="question-input"
+              type="text"
+              placeholder="Votre réponse ici"
+            />
+            <div id="helper" class="helper"></div>
           </div>
-          <div id="result-further-container" class="container">
-            <h2 id="result-further-title">Pour aller plus loin</h2>
-            <p id="result-further-description">Description de ce qu'il faut faire pour aller plus loin.</p>
-            <div id="result-further-links" class="result-further-links">
-             <!-- <ul id="result-further-links"></ul> -->
+
+          <!-- Contenu des résultats -->
+          <div id="result-container">
+            <div id="result-description-container" class="container">
+              <h2 id="result-title">.</h2>
+              <p id="result-description"></p>
+              <ul id="result-advantages"></ul>
+              <ul id="result-disadvantages"></ul>
+            </div>
+            <div id="result-further-container" class="container">
+              <h2 id="result-further-title">Pour aller plus loin</h2>
+              <p id="result-further-description">
+                Description de ce qu'il faut faire pour aller plus loin.
+              </p>
+              <div id="result-further-links" class="result-further-links">
+                <!-- <ul id="result-further-links"></ul> -->
+              </div>
             </div>
           </div>
+
+          <!-- Navigation -->
+          <div class="navigation">
+            <button id="prev-btn" disabled>Précédent</button>
+            <button id="next-btn">Suivant</button>
+          </div>
         </div>
 
-        <!-- Navigation -->
-        <div class="navigation">
-          <button id="prev-btn" disabled>Précédent</button>
-          <button id="next-btn">Suivant</button>
-        </div>
+        <footer>
+          <a>This is a test</a>
+        </footer>
       </div>
-
     </div>
-
-    <footer>
-      <a>This is a test</a>
-    </footer>
   </body>
 </html>
