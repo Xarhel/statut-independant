@@ -343,7 +343,7 @@ function explainResult() {
     ];
     let sasuDisadvantages = [
       "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise.",
-      "❌ Le dividende versé par la SASU est calculé après paiement de l'impôt sur les sociétés, 15% jusqu'à 42.500€ de bénéfice et 25% au-delà.",
+      "❌ Le dividende versé est calculé après paiement de l'impôt sur les sociétés, 15% jusqu'à 42.500€ de bénéfice et 25% au-delà.",
       "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devrez payer des cotisations sociales très importantes sur ce salaire.",
       "❌ La SASU nécessite de rédiger des statuts et de nommer un président, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
     ];
