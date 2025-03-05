@@ -320,20 +320,55 @@ function explainResult() {
     </a>
     `;
   } else if (winner === "eurl") {
-    document.getElementById(
-      "result-description-container"
-    ).innerHTML = `<p>Vous devriez opter pour une EURL.</p>
-    <p>Une EURL est une Entreprise Unipersonnelle à Responsabilité Limitée. C'est une société à responsabilité limitée (SARL) avec un seul associé.</p>
-    <p>Le principal avantage de l'EURL est de protéger le patrimoine personnel de l'entrepreneur en cas de difficultés financières de l'entreprise.</p>
-    <p>Le choix de l'EURL est particulièrement adapté pour les entrepreneurs individuels qui souhaitent protéger leur patrimoine personnel et bénéficier d'une fiscalité avantageuse.</p>
-    `;
-    document.getElementById("result-further-container").innerHTML = `
-    <h2>Vous souhaitez en savoir plus ?</h2>
-    <ul>
-      <li><a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F23262" target="_blank">Service Public - EURL</a></li>
-      <li><a href="https://www.legalstart.fr/fiches-pratiques/creation-entreprise/creer-eurl/" target="_blank">Legalstart - Créer une EURL</a></li>
-      <li><a href="https://www.legalstart.fr/fiches-pratiques/creation-entreprise/creer-eurl/" target="_blank">Legalstart - Créer une EURL</a></li>
-    </ul>`;
+    let eurlAdvantages = [
+      "✅ L'EURL est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
+      "✅ L'EURL est souvent choisie par les entrepreneurs souhaitant se verser un salaire plusieurs fois dans l'année plutôt qu'un dividende en fin d'année.",
+      "✅ Quand bien même vous bénéficieriez du chômage, vous pouvez vous verser un salaire minimal et conserver vos droits au chômage qui complèteront votre rémunération.",
+      "✅ En cas d'expiration des droits au chômage, il peut être préférable de commencer par une EURL puis, dans le cas où vous souhaiteriez faire grandir votre structure, passer à une SASU ou SAS.",
+      "✅ En tant que dirigeant associé unique d'une EURL, vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez moins de charges sociales qu'un président de SASU mais êtes moins couverts en cas de maladie ou de chômage.",
+    ];
+    let eurlDisadvantages = [
+      "❌ L'EURL est plus complexe à mettre en place qu'une micro-entreprise, elle présente un coût de création et nécessite plusieurs démarches administratives pour lesquelles vous pouvez facilement vous faire accompagner.",
+      "❌ L'EURL nécessite de rédiger des statuts et de désigner un gérant, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
+      "❌ Même si votre EURL ne dégage pas de bénéfices, vous devrez payer des cotisations sociales minimales, environ 1.000€ par an.",
+      "❌ L'EURL est une structure plus rigide que la SASU, néanmoins, si vous êtes seul à la tête de l'entreprise, cela ne devrait pas poser de problème.",
+
+    ];
+     let websites = [
+      {
+        url: "https://bpifrance-creation.fr/encyclopedie/structures-juridiques/entreprendre-seul/eurl-ou-sarl-a-associe-unique",
+        favicon: "http://www.google.com/s2/favicons?domain=www.bpifrance-creation.fr",
+        title: "Bpifrance"
+      },
+      {
+        url: "https://www.legalplace.fr/guides/eurl/",
+        favicon: "http://www.google.com/s2/favicons?domain=www.legalplace.fr",
+        title: "Legalplace"
+      },
+      {
+        url: "https://entreprendre.service-public.fr/vosdroits/F37777",
+        favicon: "http://www.google.com/s2/favicons?domain=www.service-public.fr",
+        title: "Service Public"
+      }
+    ]
+    const resultAdvantages = document.getElementById("result-advantages");
+    resultAdvantages.innerHTML = "";
+    for (const advantage of eurlAdvantages) {
+      const li = document.createElement("li");
+      li.textContent = advantage;
+      resultAdvantages.appendChild(li);
+    }
+    const resultDisadvantages = document.getElementById("result-disadvantages");
+    resultDisadvantages.innerHTML = "";
+    for (const disadvantage of eurlDisadvantages) {
+      const li = document.createElement("li");
+      li.textContent = disadvantage;
+      resultDisadvantages.appendChild(li);
+    }
+    document.getElementById("result-title").textContent = "Vous devriez opter pour une EURL";
+    document.getElementById("result-description").textContent = "l'EURL (Entreprise Unipersonnelle à Responsabilité Limitée) est une forme juridique qui permet à un entrepreneur individuel de créer une société. Dans les points ci-dessous, nous prenons l'exemple d'une EURL à l'impôt sur les sociétés (IS) et non à l'impôt sur les revenus (IR).";
+    document.getElementById("result-further-description").textContent = "Voici quelques sites pour vous aider à mieux comprendre l'EURL";
+    createLinks(websites);
   } else {
     let sasuAdvantages = [
       "✅ La SASU est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
