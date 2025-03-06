@@ -289,40 +289,62 @@ function showResult() {
   const resultContainer = document.getElementById("result-container");
   resultContainer.style.display = "block";
 }
-// A tester, éviter de charger le HTML à partir du JS et créer des classes spécifiques pour les résultats
-//
-//
+
 function explainResult() {
   if (winner === "micro") {
-    document.getElementById(
-      "result-description-container"
-    ).innerHTML = `<h2>Vous devriez opter pour une micro</h2>
-    <p>Dans les faits, une "micro-entreprise" correspond à un statut fiscal et social, dans la majeure partie des cas, vous êtes ce qu'on appelle un "Entrepreneur Individuel" (EI).</p>
-    <p>Le statut de la micro-entreprise permet de bénéficier d'une comptabilité allégée et de payer des cotisations sociales et des impôts sur le revenu en fonction du chiffre d'affaires réalisé.</p>
-    <p>Ce choix est particulièrement adapté dans des cas où les charges sont faibles, le chiffre d'affaires est limité et les risques sont faibles.</p>
-    `;
-    document.getElementById("result-further-container").innerHTML = `
-    <h2>Vous souhaitez en savoir plus ?</h2>
-    <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F31228" target="_blank">
-      <div class="favicon-box">
-          <img src="http://www.google.com/s2/favicons?domain=www.service-public.fr" alt="Service Public Favicon">
-      </div>
-    </a>
-    <a href="https://www.urssaf.fr/portail/home/independant/je-cree-ma-micro-entreprise.html" target="_blank">
-      <div class="favicon-box">
-          <img src="http://www.google.com/s2/favicons?domain=www.urssaf.fr" alt="Service Public Favicon">
-      </div>
-    </a>
-    <a href="https://www.autoentrepreneur.urssaf.fr/portail/accueil.html" target="_blank">
-      <div class="favicon-box">
-          <img src="http://www.google.com/s2/favicons?domain=www.autoentrepeneur.urssaf.fr" alt="Service Public Favicon">
-      </div>
-    </a>
-    `;
+    let microAdvantages = [
+      "✅ La Micro-entreprise peut être une solution temporaire pour tester votre activité avant de vous lancer dans une structure plus complexe comme l'EURL ou la SASU.",
+      "✅ La Micro-entreprise est très facile à mettre en place, en quelques clics sur le site du guichet unique.",
+      "✅ La Micro-entreprise est très simple à gérer, vous n'avez pas besoin de tenir une comptabilité complexe, une simple facturation suffit.",
+      "✅ La Micro-entreprise bénéficie, depuis 2022, de la possibilité de limiter la responsabilité du dirigeant en cas de dette importante aux seuls biens utiles à l'activité professionnelle.",
+      "✅ Si vous bénéficiez du chômage (ARE), vous pouvez cumuler vos allocations avec les revenus de votre micro-entreprise dans la limite de 70% de votre ancien salaire.",
+    ];
+    let microDisadvantages = [
+      "❌ La Micro-entreprise possède un plafond de chiffre d'affaires, en 2025, celui-ci est de 188.700€ pour les activités de vente de marchandises et de fourniture de logement et de 77.700€ pour les prestations de services.",
+      "❌ En cas de dépassement du plafond, vous devrez changer de régime fiscal et social, ce qui entraînera des démarches administratives supplémentaires.",
+      "❌ Au régime micro vous ne pouvez pas déduire vos charges de votre chiffre d'affaires, vous bénéficiez néanmoins d'un abattement forfaitaire qui vient réduire votre revenu imposable. Si vous avez beaucoup de charges, il est préférable de ne pas opter pour la micro-entreprise.",
+      "❌ Il n'est pas possible de moduler son salaire en micro-entreprise, vous êtes donc imposé sur 100% des revenus de votre activité.", // A modifier
+      "❌ Vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez donc des charges sociales plus importantes qu'un salarié mais bénéficiez de moins de couverture sociale.",
+    ];
+     let websites = [
+      {
+        url: "https://bpifrance-creation.fr/encyclopedie/structures-juridiques/entreprendre-seul/eurl-ou-sarl-a-associe-unique",
+        favicon: "http://www.google.com/s2/favicons?domain=www.bpifrance-creation.fr",
+        title: "Bpifrance"
+      },
+      {
+        url: "https://www.legalplace.fr/guides/eurl/",
+        favicon: "http://www.google.com/s2/favicons?domain=www.legalplace.fr",
+        title: "Legalplace"
+      },
+      {
+        url: "https://entreprendre.service-public.fr/vosdroits/F37777",
+        favicon: "http://www.google.com/s2/favicons?domain=www.service-public.fr",
+        title: "Service Public"
+      }
+    ]
+    const resultAdvantages = document.getElementById("result-advantages");
+    resultAdvantages.innerHTML = "";
+    for (const advantage of microAdvantages) {
+      const li = document.createElement("li");
+      li.textContent = advantage;
+      resultAdvantages.appendChild(li);
+    }
+    const resultDisadvantages = document.getElementById("result-disadvantages");
+    resultDisadvantages.innerHTML = "";
+    for (const disadvantage of microDisadvantages) {
+      const li = document.createElement("li");
+      li.textContent = disadvantage;
+      resultDisadvantages.appendChild(li);
+    }
+    document.getElementById("result-title").textContent = "Vous devriez opter pour une Micro-entreprise";
+    document.getElementById("result-description").textContent = "La micro-entreprise est une forme juridique très simple à mettre en place et à gérer. Elle est souvent choisie par les entrepreneurs individuels qui débutent leur activité et/ou qui ne pensent pas dépasser les plafonds de chiffre d'affaires. Dans les points ci-dessous, nous prenons l'exemple d'une Entreprise Individuelle (EI) au régime micro-fiscal et micro-social.";
+    document.getElementById("result-further-description").textContent = "Voici quelques sites pour vous aider à mieux comprendre l'EURL";
+    createLinks(websites);
   } else if (winner === "eurl") {
     let eurlAdvantages = [
       "✅ L'EURL est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
-      "✅ L'EURL est souvent choisie par les entrepreneurs souhaitant se verser un salaire plusieurs fois dans l'année plutôt qu'un dividende en fin d'année.",
+      "✅ L'EURL est souvent choisie par les entrepreneurs souhaitant se verser un salaire plutôt qu'un dividende en fin d'année.",
       "✅ Quand bien même vous bénéficieriez du chômage, vous pouvez vous verser un salaire minimal et conserver vos droits au chômage qui complèteront votre rémunération.",
       "✅ En cas d'expiration des droits au chômage, il peut être préférable de commencer par une EURL puis, dans le cas où vous souhaiteriez faire grandir votre structure, passer à une SASU ou SAS.",
       "✅ En tant que dirigeant associé unique d'une EURL, vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez moins de charges sociales qu'un président de SASU mais êtes moins couverts en cas de maladie ou de chômage.",
@@ -399,6 +421,7 @@ function explainResult() {
         title: "Service Public"
       }
     ]
+    // ⚠️ TODO: Refactor this code to avoid repetition
     const resultAdvantages = document.getElementById("result-advantages");
     resultAdvantages.innerHTML = "";
     for (const advantage of sasuAdvantages) {
