@@ -25,7 +25,7 @@ const questions = [
   {
     number: 3,
     description:
-      "Si vous touchez le chômage, vous préférez :<br><br>• Toucher le chômage tous les mois et vous verser un dividence à la fin de l'année ?<br>• Vous verser un salaire tous les mois avec les revenus de votre activité ?",
+      "Si vous touchez le chômage, vous préférez :<br>👉 Toucher le chômage tous les mois et vous verser un dividence à la fin de l'année ?<br>👉 Vous verser un salaire tous les mois avec les revenus de votre activité ?",
     type: "select",
     options: [
       "Verser un dividence à la fin de l'année",
@@ -61,16 +61,16 @@ const questions = [
   {
     number: 6,
     description:
-      "Souhaitez-vous protéger votre patrimoine personnel ou estimez-vous que les risques sont plutôt faibles ?",
+      "vous préférez :<br>👉 Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible ?<br>👉 Payer plus pour une meilleure protection sociale (notamment retraite et chômage) ?",
     type: "select",
     options: [
-      "Je protège mon patrimoine personnel",
-      "Les risques sont plutôt faibles",
+      "Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible",
+      "Payer plus de charges sociales mais bénéficier d'une meilleure protection sociale",
     ],
     placeholder: "",
-    shortcut: "Protection du patrioine personnel",
+    shortcut: "Protection sociale",
     helper:
-      "Préférez l'option :les risques sont plutôt faibles, si votre activité ne vous amène pas à prendre des risques financiers importants.",
+      "La protection sociale correspond aux mécanismes de prévoyance collective (vieillesse, maladie, maladie professionnelle, invalidité, chômage...)",
   },
 ];
 
@@ -111,7 +111,6 @@ function loadQuestion(step) {
   questionTitle.textContent = `Question ${question.number}`;
   questionDescription.innerHTML = question.description.replace(/\n/g, "<br>");
 
-  // Il pourrait être intéressant de passer d'un select à des radio buttons pour les questions à choix multiples
   // Configurer l'input dynamiquement
   if (question.type === "select") {
     const questionInput = document.getElementById("question-input");
@@ -160,8 +159,6 @@ function loadQuestion(step) {
     currentStep === questions.length - 1 ? "Terminer" : "Suivant";
   nextBtn.disabled = false;
   console.log(currentStep);
-
-  //updateResultList();
 }
 
 // Passer à une étape donnée
@@ -232,7 +229,7 @@ function computeTotal() {
     eurl += 10;
     sasu += 10;
   } else {
-    micro += 100;
+    micro += 10;
   }
 
   if (question2 === "Oui") {
@@ -269,11 +266,11 @@ function computeTotal() {
     sasu += 10;
   }
 
-  if (question6 === "Je protège mon patrimoine personnel") {
-    eurl += 1;
-    sasu += 1;
-  } else {
+  if (question6 === "Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible") {
     micro += 1;
+    eurl += 1;
+  } else {
+    sasu += 1;
   }
 
   if (micro > eurl && micro > sasu) {
