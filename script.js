@@ -25,7 +25,7 @@ const questions = [
   {
     number: 3,
     description:
-      "Si vous touchez le chômage, vous préférez :<br>👉 Toucher le chômage tous les mois et vous verser un dividence à la fin de l'année ?<br>👉 Vous verser un salaire tous les mois avec les revenus de votre activité ?",
+      "Si vous touchez le chômage, vous préférez :<br>👉 Percevoir le chômage et vous verser un dividence à la fin de l'année ?<br>👉 Compléter votre chômage mensuellement avec les revenus de votre activité ?",
     type: "select",
     options: [
       "Verser un dividence à la fin de l'année",
@@ -158,7 +158,7 @@ function loadQuestion(step) {
   nextBtn.textContent =
     currentStep === questions.length - 1 ? "Terminer" : "Suivant";
   nextBtn.disabled = false;
-  console.log(currentStep);
+  // console.log(currentStep);
 }
 
 // Passer à une étape donnée
@@ -206,7 +206,7 @@ nextBtn.addEventListener("click", () => {
     breadcrumb.children[currentStep].classList.toggle("completed", true);
     document.getElementById("sidebar").style.display = "none";
     currentStep = questions.length;
-    console.log("Réponses :", answers);
+    // console.log("Réponses :", answers);
     computeTotal();
     showResult();
     explainResult();
@@ -238,9 +238,12 @@ function computeTotal() {
     sasu += 1;
   }
 
-  if (question3 === "Verser un gros dividence à la fin de l'année") {
+  if (question3 === "Verser un dividence à la fin de l'année") {
     sasu += 1;
   } else if (question3 === "Compléter mon salaire mensuellement") {
+    micro += 1;
+    eurl += 1;
+  } else {
     micro += 1;
     eurl += 1;
   }
@@ -273,14 +276,14 @@ function computeTotal() {
     sasu += 1;
   }
 
-  if (micro > eurl && micro > sasu) {
+  if (micro >= eurl && micro >= sasu) {
     winner = "micro";
-  } else if (eurl > micro && eurl > sasu) {
+  } else if (eurl >= sasu) {
     winner = "eurl";
   } else {
     winner = "sasu";
   }
-  console.log("micro = " + micro, "\neurl = " + eurl, "\nsasu = " + sasu);
+  // console.log("micro = " + micro, "\neurl = " + eurl, "\nsasu = " + sasu);
 }
 
 function showResult() {
@@ -297,14 +300,14 @@ function explainResult() {
       "✅ La Micro-entreprise est très facile à mettre en place, en quelques clics sur le site du guichet unique.",
       "✅ La Micro-entreprise est très simple à gérer au quotidien ; vous n'avez pas besoin de tenir une comptabilité complexe.",
       "✅ La Micro-entreprise bénéficie, depuis 2022, de la possibilité de limiter la responsabilité du dirigeant en cas de dette importante aux seuls biens utiles à l'activité professionnelle.",
-      "✅ Si vous bénéficiez du chômage (ARE), vous pouvez cumuler vos allocations avec les revenus de votre micro-entreprise dans la limite de 70% de votre ancien salaire.",
+      "✅ Si vous bénéficiez du chômage (ARE), vous pouvez compléter vos allocations avec les revenus de votre micro-entreprise.",
     ];
     let microDisadvantages = [
       "❌ La Micro-entreprise possède un plafond de chiffre d'affaires, en 2025, celui-ci est de 188.700€ pour les activités de vente de marchandises et de fourniture de logement et de 77.700€ pour les prestations de services.",
       "❌ En cas de dépassement du plafond, vous devrez changer de régime fiscal et social, ce qui entraînera des démarches administratives supplémentaires.",
       "❌ Au régime micro vous ne pouvez pas déduire vos charges de votre chiffre d'affaires, vous bénéficiez néanmoins d'un abattement forfaitaire qui vient réduire votre revenu imposable. Si vous avez beaucoup de charges, il est préférable de ne pas opter pour la micro-entreprise.",
-      "❌ Il n'est pas possible de moduler son salaire en micro-entreprise, vous êtes donc imposé sur 100% des revenus de votre activité.",
-      "❌ Vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez donc des charges sociales plus importantes qu'un salarié mais bénéficiez de moins de couverture sociale.",
+      "❌ Il n'est pas possible de moduler son salaire en micro-entreprise, vous êtes donc imposé sur 100% des revenus de votre activité (après abattement).",
+      "❌ Vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez donc des charges sociales moins importantes qu'un salarié mais bénéficiez de moins de couverture sociale.",
       "❌ Certaines activités ne sont pas compatibles avec le régime micro, renseignez-vous avant de vous lancer.",
     ];
      let websites = [
@@ -348,11 +351,11 @@ function explainResult() {
       "✅ L'EURL est souvent choisie par les entrepreneurs souhaitant se verser un salaire plutôt qu'un dividende en fin d'année.",
       "✅ Si vous bénéficiez du chômage, vous pouvez vous verser un salaire minimal et conserver vos droits au chômage qui complèteront votre rémunération.",
       "✅ Vous souhaitez faire évoluer votre structure ? L'EURL est plus facile à transformer en SARL ou en SASU qu'une micro-entreprise.",
-      "✅ En tant que dirigeant associé unique d'une EURL, vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez beaucoup moins de charges sociales (du simple au double) qu'un président de SASU mais êtes moins couverts en cas de maladie ou de chômage.",
+      "✅ L'EURL permet de moduler le montant de votre salaire et de votre dividende, vous pouvez ainsi optimiser votre rémunération et votre fiscalité ; ce qui n'est pas le cas en micro-entreprise.",
+      "✅ En tant que dirigeant associé unique d'une EURL, vous êtes considéré comme un Travailleur Non Salarié (TNS), vous payez beaucoup moins de charges sociales (du simple au double) qu'un président de SASU mais êtes moins couvert en cas de maladie ou de chômage.",
     ];
     let eurlDisadvantages = [
       "❌ L'EURL est plus complexe à mettre en place qu'une micro-entreprise, elle présente un coût de création et nécessite plusieurs démarches administratives pour lesquelles vous pouvez facilement vous faire accompagner.",
-      "❌ L'EURL nécessite de rédiger des statuts et de désigner un gérant, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
       "❌ Même si votre EURL ne dégage pas de bénéfices, vous devrez payer des cotisations sociales minimales, environ 1.000€ par an.",
       "❌ L'EURL est une structure plus rigide que la SASU, néanmoins, si vous êtes seul à la tête de l'entreprise, cela ne devrait pas poser de problème.",
 
@@ -394,15 +397,16 @@ function explainResult() {
     createLinks(websites);
   } else {
     let sasuAdvantages = [
-      "✅ La SASU est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise.",
-      "✅ La SASU est souvent plébiscitée par les entrepreneurs souhaitant maintenir leurs droits au chômage (ARE) tout en se versant un dividende en fin d'année.",
-      "✅ La SASU offre une grande souplesse dans l'organisation de l'entreprise.",
-      "✅ Le dirigeant de la SASU est 'assimilé salarié', cela signifie qu'il bénéficie d'une protection sociale plus importante que le dirigeant de micro-entreprise ou d'EURL.",
+      "✅ La SASU est souvent perçue comme une structure plus sérieuse et plus crédible qu'une micro-entreprise ou qu'une EURL.",
+      "✅ La SASU est souvent choisie par les entrepreneurs souhaitant maintenir leurs droits au chômage (ARE) tout en se versant un dividende en fin d'année.",
+      "✅ La SASU offre une grande souplesse dans l'organisation de l'entreprise, facilitant ainsi la croissance de l'entreprise et l'arrivée de nouveaux associés.",
+      "✅ La SASU permet de moduler le montant de votre salaire et de votre dividende, vous pouvez ainsi optimiser votre rémunération et votre fiscalité ; ce qui n'est pas le cas en micro-entreprise.",
+      "✅ Le dirigeant de la SASU est assimilé salarié, cela signifie qu'il bénéficie d'une protection sociale plus importante que le dirigeant de micro-entreprise ou d'EURL.",
     ];
     let sasuDisadvantages = [
       "❌ La SASU est plus complexe à mettre en place qu'une micro-entreprise.",
       "❌ Le dividende versé est calculé après paiement de l'impôt sur les sociétés, 15% jusqu'à 42.500€ de bénéfice et 25% au-delà.",
-      "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devrez payer des cotisations sociales très importantes sur ce salaire.",
+      "❌ Si vous souhaitez vous verser un salaire, la SASU est moins avantageuse que l'EURL car vous devez payer des cotisations sociales très importantes sur ce salaire.",
       "❌ La SASU nécessite de rédiger des statuts et de nommer un président, vous pouvez vous faire accompagner pour quelques centaires d'euros ou le faire vous-même.",
     ];
      let websites = [
