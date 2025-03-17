@@ -61,11 +61,11 @@ const questions = [
   {
     number: 6,
     description:
-      "vous préférez :<br>👉 Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible ?<br>👉 Payer plus pour une meilleure protection sociale (notamment retraite et chômage) ?",
+      "vous préférez :<br>👉 Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible ?<br>👉 Payer plus de charges sociales mais bénéficier d'une meilleure protection sociale (notamment retraite et chômage) ?",
     type: "select",
     options: [
-      "Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible",
-      "Payer plus de charges sociales mais bénéficier d'une meilleure protection sociale",
+      "Moins de charges sociales mais protection sociale plus faible",
+      "Plus de de charges sociales mais meilleure protection sociale",
     ],
     placeholder: "",
     shortcut: "Protection sociale",
@@ -269,7 +269,7 @@ function computeTotal() {
     sasu += 10;
   }
 
-  if (question6 === "Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible") {
+  if (question6 === "Moins de charges sociales mais protection sociale plus faible") {
     micro += 1;
     eurl += 1;
   } else {

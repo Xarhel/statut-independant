@@ -178,8 +178,8 @@ li {
 }
 
 input, select {
-  min-width: 50%;
-  width: auto;
+  min-width: 30%;
+  max-width: 100%;
   padding: 12px;
   font-size: 16px;
   border: 2px solid #ddd;
@@ -244,6 +244,11 @@ footer {
   }
 
   .breadcrumb {
-    max-width: 80%;
+    max-width: 90%;
   }
+
+  .container {
+    width: 90%;
+  }
+
 }
