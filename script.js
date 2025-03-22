@@ -25,7 +25,7 @@ const questions = [
   {
     number: 3,
     description:
-      "Si vous touchez le chômage, vous préférez :<br>👉 Percevoir le chômage et vous verser un dividence à la fin de l'année ?<br>👉 Compléter votre chômage mensuellement avec les revenus de votre activité ?",
+      "Si vous touchez le chômage, vous préférez :<br><br>👉 Percevoir le chômage et vous verser un dividence à la fin de l'année ?<br><br>👉 Compléter votre chômage mensuellement avec les revenus de votre activité ?",
     type: "select",
     options: [
       "Verser un dividence à la fin de l'année",
@@ -61,7 +61,7 @@ const questions = [
   {
     number: 6,
     description:
-      "vous préférez :<br>👉 Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible ?<br>👉 Payer plus de charges sociales mais bénéficier d'une meilleure protection sociale (notamment retraite et chômage) ?",
+      "vous préférez :<br><br>👉 Payer moins de charges sociales mais bénéficier d'une protection sociale plus faible ?<br><br>👉 Payer plus de charges sociales mais bénéficier d'une meilleure protection sociale (notamment retraite et chômage) ?",
     type: "select",
     options: [
       "Moins de charges sociales mais protection sociale plus faible",

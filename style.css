@@ -181,7 +181,7 @@ input, select {
   min-width: 30%;
   max-width: 100%;
   padding: 12px;
-  font-size: 16px;
+  font-size: 1rem;
   border: 2px solid #ddd;
   border-radius: 6px;
   outline: none;
@@ -244,11 +244,15 @@ footer {
   }
 
   .breadcrumb {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .container {
     width: 90%;
+  }
+
+  input, select {
+    width: 100%;
   }
 
 }
