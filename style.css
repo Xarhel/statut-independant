@@ -16,12 +16,17 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
 /* En-tête */
 header {
   background-color: rgba(12,24,42,1);
   color: antiquewhite;
   padding: 1rem 2rem;
   text-align: center;
+  position: fixed;
 }
 
 .breadcrumb {
