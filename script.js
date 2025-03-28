@@ -45,7 +45,6 @@ const questions = [
     placeholder: "",
     shortcut: "Activité exercée",
     helper:
-      //"L'activité libérale regroupe les professions intellectuelles (avocat, médecin, architecte, chef de projet, développeur...). L'activité commerciale concerne la vente de produits ou de services. L'activité artisanale est un métier manuel qui nécessite un savoir-faire particulier.",
       `Activité libérale 💼 → Une activité où vous mettez à profit vos compétences intellectuelles, votre expertise (exemple : médecin, avocat, consultant). <br><br>
       Activité commerciale 🛒 → Une activité où vous achetez et revendez des biens ou services pour faire du profit (exemple : commerçant, restaurateur, e-commerce). <br><br>
       Activité artisanale 🛠️ → Une activité où vous frabriquez, réparez ou transformez des produits avec un savoir-faire manuel (exemple : boulanger, coiffeur, menuisier).`
@@ -88,12 +87,20 @@ let winner;
 
 // Initialisation de l'application
 function initialize() {
-  // Créer le fil d'Ariane
+  // Création du fil d'ariane et gestion des étapes avec event listeners
   breadcrumb.innerHTML = "";
   questions.forEach((q, index) => {
     const step = document.createElement("div");
     step.textContent = q.number;
     if (index === 0) step.classList.add("active");
+    step.addEventListener("click", () => {
+      if (index < currentStep || answers[questions.length] != undefined) {
+      loadQuestion(index);
+      document.getElementById("result-container").style.display = "none";
+      document.getElementById("question-container").style.display = "block";
+      document.getElementById("sidebar").style.display = "block";
+      }
+    });
     breadcrumb.appendChild(step);
   });
 
